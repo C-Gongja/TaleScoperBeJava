@@ -40,6 +40,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/api/auth/**").permitAll()
 						.requestMatchers("/api/public/**").permitAll()
+						.requestMatchers("/api/chat/**").permitAll() // this should requires auth
 						.anyRequest().authenticated())
 				.oauth2ResourceServer(oauth2 -> oauth2
 						.jwt(jwt -> jwt

@@ -39,7 +39,7 @@ public class Users {
 	private Long id;
 
 	@Column(unique = true, nullable = false, length = 36)
-	private String uid; // UUID 필드
+	private String userUuid; // UUID 필드
 
 	@Column(nullable = false)
 	private String name;
@@ -89,8 +89,8 @@ public class Users {
 
 	@PrePersist
 	public void generateUid() {
-		if (this.uid == null) {
-			this.uid = UUID.randomUUID().toString();
+		if (this.userUuid == null) {
+			this.userUuid = UUID.randomUUID().toString();
 		}
 	}
 

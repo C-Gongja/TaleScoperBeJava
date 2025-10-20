@@ -11,7 +11,7 @@ import com.TaleScoper.TaleScoper.user.entity.Users;
 public interface UsersRepository extends JpaRepository<Users, Long> {
 	Optional<Users> findByUsername(String username);
 
-	Optional<Users> findByUid(String uid);
+	Optional<Users> findByUserUuid(String uid);
 
 	Boolean existsByUsername(String username);
 

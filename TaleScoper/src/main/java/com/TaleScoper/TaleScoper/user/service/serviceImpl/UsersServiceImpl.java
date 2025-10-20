@@ -1,9 +1,14 @@
 package com.TaleScoper.TaleScoper.user.service.serviceImpl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.TaleScoper.TaleScoper.user.service.UsersService;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
 	@Override

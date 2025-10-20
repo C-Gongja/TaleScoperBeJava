@@ -79,7 +79,7 @@ public class CustomUserDetails implements UserDetails {
 	public static CustomUserDetails from(Users user) {
 		return CustomUserDetails.builder()
 				.id(user.getId())
-				.uid(user.getUid()) // UID 매핑
+				.uid(user.getUserUuid()) // UID 매핑
 				.username(user.getEmail())
 				.email(user.getEmail())
 				.password("") // 보안상 빈 문자열로 설정

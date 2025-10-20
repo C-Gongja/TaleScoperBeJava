@@ -25,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional(readOnly = true)
 @Slf4j
 public class AuthServiceImpl implements AuthService {
-
 	private final UsersRepository usersRepository;
 	private final RoleRepository roleRepository;
 	private final PasswordEncoder passwordEncoder;
@@ -34,17 +33,14 @@ public class AuthServiceImpl implements AuthService {
 	public CustomUserDetails authenticate(SigninRequest request) {
 		log.debug("Authenticating user with email: {}", request.getEmail());
 
-		// 사용자 조회
 		Users user = usersRepository.findByEmail(request.getEmail())
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
 
-		// 비밀번호 검증
 		if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
 			log.warn("Invalid password attempt for user: {}", request.getEmail());
 			throw new BadCredentialsException("Invalid email or password");
 		}
 
-		// 계정 상태 검증 (필요시)
 		if (!user.isEnabled()) {
 			throw new BadCredentialsException("Account is disabled");
 		}
@@ -67,7 +63,7 @@ public class AuthServiceImpl implements AuthService {
 	public CustomUserDetails loadUserByUid(String uid) {
 		log.debug("Loading user by UID: {}", uid);
 
-		Users user = usersRepository.findByUid(uid)
+		Users user = usersRepository.findByUserUuid(uid)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with UID: " + uid));
 
 		return CustomUserDetails.from(user);
@@ -94,16 +90,13 @@ public class AuthServiceImpl implements AuthService {
 	public CustomUserDetails register(RegisterRequest request) {
 		log.debug("Registering new user with email: {}", request.getEmail());
 
-		// 이메일 중복 확인
 		if (existsByEmail(request.getEmail())) {
 			throw new IllegalArgumentException("User already exists with email: " + request.getEmail());
 		}
 
-		// 기본 역할 조회
 		Role userRole = roleRepository.findByName("USER")
 				.orElseThrow(() -> new IllegalStateException("Default USER role not found"));
 
-		// 새 사용자 생성
 		Users newUser = Users.builder()
 				.email(request.getEmail())
 				.password(passwordEncoder.encode(request.getPassword()))
