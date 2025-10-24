@@ -1,4 +1,4 @@
-package com.TaleScoper.TaleScoper.chat.conversation.service.messages.dto;
+package com.TaleScoper.TaleScoper.chat.messages.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class MessageResponseDto {
-	private String userUuid;
+public class MessageRequestDto {
 	private String conversationUuid;
-	private String messageUuid;
+	private String userUuid;
 	private String role;
 	private String content;
+	// private Long lat;
+	// private Long lng;
+	// private IMAGE img;
+	// private String language;
+	// User Query
+	// private String text;
 }

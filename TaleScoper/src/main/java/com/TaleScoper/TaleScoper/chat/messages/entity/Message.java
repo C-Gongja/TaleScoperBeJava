@@ -1,4 +1,4 @@
-package com.TaleScoper.TaleScoper.chat.conversation.service.messages.entity;
+package com.TaleScoper.TaleScoper.chat.messages.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

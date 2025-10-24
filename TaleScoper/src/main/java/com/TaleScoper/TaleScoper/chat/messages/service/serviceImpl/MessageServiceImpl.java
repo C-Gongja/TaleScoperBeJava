@@ -1,4 +1,4 @@
-package com.TaleScoper.TaleScoper.chat.conversation.service.messages.service.serviceImpl;
+package com.TaleScoper.TaleScoper.chat.messages.service.serviceImpl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.TaleScoper.TaleScoper.chat.conversation.entity.Conversation;
 import com.TaleScoper.TaleScoper.chat.conversation.repository.ConversationRepository;
-import com.TaleScoper.TaleScoper.chat.conversation.service.messages.dto.MessageRequestDto;
-import com.TaleScoper.TaleScoper.chat.conversation.service.messages.entity.Message;
-import com.TaleScoper.TaleScoper.chat.conversation.service.messages.repository.MessageRepository;
-import com.TaleScoper.TaleScoper.chat.conversation.service.messages.service.MessageService;
+import com.TaleScoper.TaleScoper.chat.messages.dto.MessageRequestDto;
+import com.TaleScoper.TaleScoper.chat.messages.entity.Message;
+import com.TaleScoper.TaleScoper.chat.messages.repository.MessageRepository;
+import com.TaleScoper.TaleScoper.chat.messages.service.MessageService;
 
 import lombok.RequiredArgsConstructor;
 

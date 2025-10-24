@@ -1,4 +1,4 @@
-package com.TaleScoper.TaleScoper.chat.conversation.service.messages.repository;
+package com.TaleScoper.TaleScoper.chat.messages.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.TaleScoper.TaleScoper.chat.conversation.service.messages.entity.Message;
+import com.TaleScoper.TaleScoper.chat.messages.entity.Message;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
