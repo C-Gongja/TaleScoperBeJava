@@ -1,7 +1,6 @@
 package com.TaleScoper.TaleScoper.RAGClient.config;
 
 import java.time.Duration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,9 +11,8 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import io.netty.channel.ChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
+// read-timeout handled via HttpClient.responseTimeout
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 
 @Configuration
 public class RAGClientConfig {
@@ -34,11 +32,10 @@ public class RAGClientConfig {
     public WebClient pythonWebClient() {
         log.info("Creating Python WebClient with base URL: {}", baseUrl);
 
-    // Configure TcpClient with connect and read timeouts
+    // Configure HttpClient with connect and response timeouts (non-deprecated)
     HttpClient httpClient = HttpClient.create()
-        .tcpConfiguration(tcp -> tcp
-            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectTimeoutMs)
-            .doOnConnected(connection -> connection.addHandlerLast(new ReadTimeoutHandler(readTimeoutMs / 1000))));
+        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectTimeoutMs)
+        .responseTimeout(Duration.ofMillis(readTimeoutMs));
 
         return WebClient.builder()
                 .baseUrl(baseUrl)
