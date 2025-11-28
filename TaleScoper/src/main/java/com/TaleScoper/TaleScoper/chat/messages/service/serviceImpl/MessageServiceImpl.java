@@ -28,14 +28,14 @@ public class MessageServiceImpl implements MessageService {
 	private final ConversationRepository conversationRepository;
 
 	@Override
-	public Message createUserMessage(Conversation conv, MessageRequestDto dto) {
+	public Message userNewMessage(Conversation conv, MessageRequestDto dto) {
 		Message msg = Message.builder()
 				.conversationUuid(
 						conv.getConversationUuid())
 				.userUuid(
 						conv.getUserUuid())
 				.role("user")
-				.content(dto.getContent())
+				.content(dto.getMessage())
 				.createdAt(LocalDateTime.now())
 				.build();
 		return messageRepository.save(msg);
@@ -44,10 +44,8 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public Message createAssistantMessage(Conversation conv, String content) {
 		Message msg = Message.builder()
-				.conversationUuid(conv
-						.getConversationUuid())
-				.userUuid(
-						conv.getUserUuid())
+				.conversationUuid(conv.getConversationUuid())
+				.userUuid(conv.getUserUuid())
 				.role("assistant")
 				.content(content)
 				.createdAt(LocalDateTime.now())
@@ -70,7 +68,7 @@ public class MessageServiceImpl implements MessageService {
 		}
 
 		// 3. 입력값 검증 (null 체크 등)
-		if (messageDto.getContent() == null || messageDto.getContent().trim().isEmpty()) {
+		if (messageDto.getMessage() == null || messageDto.getMessage().trim().isEmpty()) {
 			throw new IllegalArgumentException("Message content cannot be empty");
 		}
 
@@ -80,14 +78,14 @@ public class MessageServiceImpl implements MessageService {
 				.userUuid(messageDto.getUserUuid())
 				.role(messageDto.getRole())
 				// .content(messageDto.getContent().trim()) // 공백 제거??
-				.content(messageDto.getContent())
+				.content(messageDto.getMessage())
 				.build();
 
 		return messageRepository.save(newMessage);
 	}
 
 	@Override
-	public Page<Message> getMessagesByConversation(String conversationUuid, int page, int size) {
+	public Page<Message> getMessagesByConversation(String conversationUuid, int page, int size ) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
 		return messageRepository.findByConversationUuidOrderByCreatedAtDesc(conversationUuid, pageable);
 	}

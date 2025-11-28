@@ -13,7 +13,8 @@ public class MessageRequestDto {
 	private String conversationUuid;
 	private String userUuid;
 	private String role;
-	private String content;
+	private String message;
+	private String imageBase64;
 	// private Long lat;
 	// private Long lng;
 	// private IMAGE img;

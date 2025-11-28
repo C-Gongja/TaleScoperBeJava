@@ -11,7 +11,7 @@ import com.TaleScoper.TaleScoper.chat.messages.entity.Message;
 
 public interface MessageService {
 
-	public Message createUserMessage(Conversation conv, MessageRequestDto dto);
+	public Message userNewMessage(Conversation conv, MessageRequestDto dto);
 
 	public Message createAssistantMessage(Conversation conv, String content);
 
